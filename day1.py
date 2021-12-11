@@ -9,7 +9,7 @@ def partOne():
         line = int(line)
 
         if line > previousLine:
-            count = count + 1
+            count += 1
 
         previousLine = line
         line = f.readline()
@@ -31,7 +31,7 @@ def partTwo():
         sum2 = line2 + line3 + line4
 
         if sum1 < sum2:
-            count = count + 1
+            count += 1
 
         line = line2
         line2 = line3
