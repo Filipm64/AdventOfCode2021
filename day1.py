@@ -1,5 +1,5 @@
 def partOne():
-    f = open("day1.txt", "r")
+    f = open("puzzleInput/day1.txt", "r")
     line = int(f.readline())
     previousLine = line
     count = 0
@@ -17,7 +17,7 @@ def partOne():
     print("Count part one = ", count)
 
 def partTwo():
-    fPartTwo = open("day1.txt", "r")
+    fPartTwo = open("puzzleInput/day1.txt", "r")
     line = int(fPartTwo.readline())
     line2 = int(fPartTwo.readline())
     line3 = int(fPartTwo.readline())

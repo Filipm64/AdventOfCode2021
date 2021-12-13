@@ -2,7 +2,7 @@ def partOne():
     forward = 0
     depth = 0
 
-    f = open("day2.txt", "r")
+    f = open("puzzleInput/day2.txt", "r")
     value = f.readline()
 
     while value != "":
@@ -27,7 +27,7 @@ def partTwo():
     depth = 0
     aim = 0
 
-    fPartTwo = open("day2.txt", "r")
+    fPartTwo = open("puzzleInput/day2.txt", "r")
     value = fPartTwo.readline()
 
     while value != "":
