@@ -44,7 +44,7 @@ def partOne():
 
 
 def partTwo():
-    print("Part two")
-
+    print("PartTwo")
 
 partOne()
+partTwo()
