@@ -1,91 +1,40 @@
 def partOne():
-    fPartOne = open("puzzleInput/day4.txt")
-    print("PartOne")
-    moves = []
-    moves = fPartOne.readline().split(",")
-    board = []
-    markedList = []
-
-    markedList.append([False, False, False, False, False])
-    markedList.append([False, False, False, False, False])
-    markedList.append([False, False, False, False, False])
-    markedList.append([False, False, False, False, False])
-    markedList.append([False, False, False, False, False])
-
-    for x in moves:
-        print(x, end=" ")
-
-    print("Board: ", board)
-
-    gameContinue = True
-    index = 0
-
-    numberOfWhile = 0
-    winnersInfo = []
-
-    while gameContinue:
-        numberOfWhile += + 1
-        print("While is running ", numberOfWhile, " times")
-
-        board.clear()
-        fPartOne.readline()
-        board.append(fPartOne.readline().replace("  ", " ").strip().split(" "))
-        board.append(fPartOne.readline().replace("  ", " ").strip().split(" "))
-        board.append(fPartOne.readline().replace("  ", " ").strip().split(" "))
-        board.append(fPartOne.readline().replace("  ", " ").strip().split(" "))
-        board.append(fPartOne.readline().replace("  ", " ").strip().split(" "))
-
-        markedList.clear()
-        markedList.append([False, False, False, False, False])
-        markedList.append([False, False, False, False, False])
-        markedList.append([False, False, False, False, False])
-        markedList.append([False, False, False, False, False])
-        markedList.append([False, False, False, False, False])
-
-        numberOfMoves = 0
-
-        for x in moves:
-            numberOfMoves += + 1
+    with open("puzzleInput/day4.txt") as f:
+        drawn = [int(x) for x in f.readline().strip('\n').split(',')]
+        cards = []
+        while f.readline():
+            card = []
             for i in range(5):
-                for y in range(5):
-                    if board[i][y] == x:
-                        markedList[i][y] = True
-                        for w in range(5):
-                            if markedList[w][0] & markedList[w][1] & markedList[w][2] & markedList[w][3] & markedList[w][4] | markedList[0][w] & markedList[1][w] & markedList[2][w] & markedList[3][w] & markedList[4][w]:
-                                 # winnerInfo = [numberOfMoves, lastMove, unmarkedCount]
-                                
-                                 unmarkedCount = 0
-                                 lastMove = int(x)
+                card.extend([int(x) for x in f.readline().strip('\n').split(' ') if x != ''])
+            cards.append(card)
+    def isWinner(card):
+        #Horizontal rows
+        start = 0
+        for i in range(5):
+            if card[start] + card [start + 1] + card[start + 2] + card[start + 3] + card[start + 4] == 500:
+                return True
+            start += 5
+        #Vertical columns
+        start = 0
+        for i in range(5):
+            if card[start] + card [start + 5] + card[start + 10] + card[start + 15] + card[start + 20] == 500:
+                return True
+            start += 1
+        #No bingos today
+        return False
 
-                                 for n in range(5):
-                                    for o in range(5):
-                                        if markedList[n][o] == False:
-                                            unmarkedCount += + int(board[n][o])
-                                 winnersInfo.append([numberOfMoves, lastMove, unmarkedCount])
-
-                                
-                                 
-        index += + 1
-        if index >= len(moves):
-            gameContinue = False
-
-    finalWinner = winnersInfo[0][0]
-    print("Winnerinfo00 ", winnersInfo[0][0])
-    for n in winnersInfo:
-        print("n ", n[0])
-        print("Final winner ",finalWinner)
-        if n[0] < finalWinner:
-            finalWinner = n
-    print("Final winner: ", finalWinner[0])
-    score = int(finalWinner[1]) * int(finalWinner[2])
-    print("Final score: ", score)
-    
-    fPartOne.close()
-
-    
-    
-
-    
-    
+    found = False
+    while found == False:
+        number = drawn[0]
+        drawn = drawn[1:]
+        for card in cards:
+            for i in range(len(card)):
+                if card[i] == number:
+                    card[i] = 100
+        for card in cards:
+            if isWinner(card):
+                total = sum([x for x in card if x != 100])
+                print("Part one solution: ", total * number)
+                found = True
 
 partOne()
